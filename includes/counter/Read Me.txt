@@ -1,0 +1,41 @@
+DB Counter Script
+Author: Demon
+Email: scripts@demonboard.co.uk
+URL: http://www.demonboard.co.uk/
+
++------------------------------------
+|	Installation Guide
++------------------------------------
+
+1. Upload all files in ZIP file onto web server.
+
+2. CHMOD Root Directory and any sub-directories and all files: '0777'
+
+3. Access 'index.php' from a browser to test the script.
+
+4. Integrate the script into your web page (See Integration Section)
+
++------------------------------------
+|	Integration
++------------------------------------
+
+To integrate the script into a webpage, follow the instructions below:
+
+To show counter data, use the following code on your webpage:
+<?php include "counter.txt"; ?>
+
+To count hits to a page, use the following code:
+<?php include "count.php"; ?>
+
+To count hits and display the result, you can use a combination
+of both the above codes
+
++------------------------------------
+|	Licence Information
++------------------------------------
+
+The use of this script ('DB Counter Script') if free. Re-distribution
+and modification requires written permission from Author ('Demon'). For
+more information, please email scripts@demonboard.co.uk.  For support on
+how to use this script or modification to layout, please visit our forum
+@ http://www.demonboard.co.uk/forum/.

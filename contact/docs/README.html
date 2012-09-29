@@ -1,0 +1,304 @@
+<html>
+<head>
+<title>Mike's Contact Script - Documentation</title>
+<style type="text/css">
+.center {
+text-align:center;
+}
+.code {
+font-size:small;
+font-weight:bold;
+margin-left:40px;
+white-space:nowrap;
+}
+.header {
+font-size:x-large;
+font-weight:bold;
+text-align:center;
+}
+.layout {
+background-color:#FFFFFF;
+border:1px solid #999999;
+padding:5px;
+margin-bottom:5px;
+width:760px;
+}
+.level2list {
+list-style-type:lower-alpha;
+}
+.level3list {
+list-style-type:upper-alpha;
+}
+.l2title {
+color:#FF0000;
+font-weight:bold;
+margin-left:40px;
+}
+.l3title {
+color:#000000;
+font-weight:bold;
+margin-left:80px;
+}
+.main {
+font-family:Verdana,Arial,Helvetica,sans-serif;
+margin-left:auto;
+margin-right:auto;
+}
+.title {
+color:#FF0000;
+font-weight:bold;
+}
+body {
+background-color:#EFEFEF;
+}
+</style>
+</head>
+
+<body>
+
+<table align="center" class="main">
+<tr>
+<td>
+
+<div class="layout">
+<p class="header">Mike's Contact Script - Documentation</p>
+</div>
+
+<div class="layout"><p>Mike's Contact Script</p>
+
+<p>Sick of spam?  Stop giving your email addresses to spammers!</p>
+
+<p>Spammers run little programs that scour the web for email addresses, when one is found it is added to their list.  This contact script will allow you to keep your email address hidden while still allowing your visitors to contact you.</p>
+
+<p>I hope you enjoy this script as much as enjoyed putting it together.  If you find any bugs please feel free to contact me!</p>
+
+<p>Thank you,<br>
+Mike Hanson<br>
+Owner, theMike.com</p></div>
+
+<div class="layout">
+<ol>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#quick">Quick Install</a></li>
+<li><a href="#install">Installation</a></li>
+<ol class="level2list">
+<li><a href="#overview">Overview</a></li>
+<li><a href="#walkthrough">Feature Walk through</a></li>
+<ol class="level3list">
+<li><a href="#instScript">Install Script</a></li>
+<li><a href="#tempSystem">Template System</a></li>
+</ol>
+<li><a href="#ftp">Install using FTP</a></li>
+<li><a href="#console">Installing on a UNIX/Linux server via console</a></li>
+</ol>
+<li><a href="#license">License</a></li>
+<li><a href="ChangeLog.txt">ChangeLog</a></li>
+<li><a href="http://www.themike.com/forums/viewforum.php?f=8">Support Forums</a></li>
+</ol>
+</div>
+
+<div class="layout">
+<a name="requirements"><p class="title">1. Requirements</p></a>
+<ul>
+<li>PHP 4.3.10+</li>
+<p>The following are only required if you enable the image verification.</p>
+<li>freeCap: <a href="http://www.boutell.com/gd/">GDlib (Version 2.0 or greater recommended)</a></li>
+<li>GOTCHA: <a href="http://www.boutell.com/gd/">GDlib (Version 2.0 or greater recommended)</a>
+<br>with <a href="http://www.freetype.org/">FreeType 2+</a></li>
+</ul>
+</div>
+
+<div class="layout">
+<a name="quick"><p class="title">2. Quick Install</p></a>
+<ol>
+<li><p>Decompress the package.<br>
+<span class="code">tar -zxvf contactForm-1-1-0.tar.gz</span><br>
+(Or using your favorite archive utility.)</p></li>
+<li><p>Upload all of the files to your server.</li>
+<li><p>Change the permissions of constants.php, emails.php, and formSelection.php to 666 or rw-rw-rw-.<br>
+<span class="code">chmod 666 constants.php emails.php formSelection.php</span></p></li>
+<li><p>Open up install.php in your web browser.<br>
+<span class="code">http://www.example.com/contactForm/install.php</span></p></li>
+<li><p>Fill out all fields as directed, paying special attention to the emails section.</p></li>
+<li><p>Press the install button.</p></li>
+<li><p>If there were no errors, <b>DELETE INSTALL.PHP</b>.  Failing to do so creates a major security hazard.</p></li>
+<li><p>You're done!  Test the script by sending yourself an email, then ... dance.</p></li>
+</ol>
+</div>
+
+<div class="layout">
+<a name="install"><p class="title">3.  Installation</p></a>
+<p class="l2title"><a name="overview">a. Overview</a></p>
+<p>Mike's Contact Script is a PHP based email form which is both easy to use and simple to install.  This is not your average simple contact form, it is much more...
+<ul>
+<li>An install script is included which eliminates the need to edit PHP script.</li>
+<li>The script uses a template system making layout changes easy.</li>
+<li>As secure as an email script can be, it preforms several checks before a message is sent.</li>
+</ul></p>
+
+<p class="l2title"><a name="walkthrough">b. Feature Walk through</a></p>
+<p class="l3title"><a name="instScript">Install Script</a></p>
+<p>The supplied install script will completely setup the contact script on your server.  The only editing you need to do is with the layout, and that's only if you don't like what's supplied.</p>
+
+<p>The install script is pretty straight forward, simply fill in the fields and press the install button.  If you need more help here is a list of what each field does or is asking for.</p>
+<ol>
+<li><p>"Site Name:"  Enter the name or URL of your site.</p>
+<p>This is used in the subject, message, and sent page.  Basically the email sent will have a subject line like, "Message from SITE NAME: Users subject."  So if you enter "example.com" the subject would be "Message from example.com: Blah subject."</p></li>
+
+<li><p>"Max Name:"  Enter the maximum allowable character length of the name portion of the email.</p>
+
+<p>This is mostly to combat against buffer overflow attacks, (Hey it'll make my computer science professors happy :-) ).  When a user enters a name that is longer than the number you enter an error will be displayed and the user will be prompted to try again.  For example if you enter 5 here and someone with the name, "Mike Hanson" tries to email you.  He'll get an error stating that the name he entered is to long and to please try again.  If he enters "Mike" instead there will be no error and the message will go through.</p>
+
+<p>A length of 500 is probably more than enough here, feel free to go higher.  Remember though, the bigger the number the longer an email can be and therefore the more space that email can take up.</p></li>
+
+<li><p>"Max Address:"  Enter the maximum allowable character length of the address.</p>
+<p>See "Max Name:" above, a length of 500 should be plenty, feel free to go higher.</p></li>
+
+<li><p>"Max Subject:"  Enter the maximum allowable character length of the subject.</p>
+<p>See "Max Name:" above, a length of 1000 should be plenty, feel free to go higher.</p></li>
+
+<li><p>"Max Message:"  Enter the maximum allowable character length of the message.</p>
+<p>See "Max Name:" above, a length of 10000 should be plenty, feel free to go higher.</p></li>
+
+<li><p>"Max Attempts:"  Enter the maximum number of times a user can get away with an error.</p>
+
+<p>This is to stop, or slow down rather, brute force attacks.  If you enter 5 here, that gives the user 5 times to get an email right.  If the user tries sending his or her message 5 times and does something wrong each time, an error message will be displayed.  The user will be asked to try again later and their message will be destroyed.</p>
+
+<p>20 should be reasonable enough here.</p></li>
+
+<li><p>"CAPTCHA image:"  Pick which CAPTCHA image you wish to use for spam protection.  You can also turn it off if you wish.</p>
+
+<p>Why do you need a CAPTCHA image?  Because, it is a way to tell computers and humans apart!  A computer program has a hard time deciphering these little puzzles while most humans can do this easily.  By having one of these tests there is less of a chance that a computer program can be used to spam you through the contact form.</p>
+
+<p>Both FreeCap and GOTCHA are good image verification solutions, but there are slight trades offs between the two.  FreeCap is "hard to break" while GOTCHA is "fast."</p>
+
+<p>What I mean by that is FreeCap puts more work into being random.  This makes it hard to create a program that will decipher the image.  There is a price to pay for being random; It takes more memory and computations to create an image.  On some servers this is not a good idea!</p>
+
+<p>GOTCHA balances speed with security.  It uses less memory and is less computationally expensive than FreeCap.  However, it is not as strong as FreeCap.</p>
+
+<p>So which should you use?  Pick the one you like the best!  I recommend GOTCHA because it is fast and I think it's easier to read.</p>
+
+<p>Please remember that people with vision problems will not be able to use the form if you enable either CAPTCHA.  This includes people who use text based browsers!  I recommend leaving them with another option to contact you.  For example direct them to a phone number or to an email address that you don't mind giving out publicly.</p></li>
+
+<li><p>"GD Version:"  Enter the version of GDlib that you are using.  The install script tries to auto detect the version you are using so you shouldn't have to change this value.</p>
+
+<p>The value should be between 1 and 3. If it isn't a number ask your host what version of GD is installed.</p></li>
+
+<li><p>"Email Addresses:"  Enter each email address you wish to be available here.
+
+<p>The email addresses you enter will be parsed for you automatically, which means you don't need to edit or know PHP.  Each email address should be on a separate line, and each column should be separated by a semi-colon (This thingy -> ;).</p>
+
+<p>Enter each email address using the format shown:<br>
+<span class="code">Email Description; Name; Email address</span></p>
+
+<p>For example, say you have two email addresses one for Mike and one for John.  Here's what you would enter:<br>
+<span class="code">Mike's Email Address; Mike Hanson; mike@example.com</span><br>
+<span class="code">John Doe - Sales; John Doe; john@example.com</span></p>
+
+<p>With version 1.1 there is another option to entering email addresses.  If you want a message copied to another email address simply add more email addresses per line, separated by a comma (This thingy -> ,).</p>
+
+<p>For example, say you want a message that is sent to Mike's Email Address to also be sent to the webmaster.  This is what you would enter:<br>
+<span class="code">Mike's Email Address; Mike Hanson; mike@example.com, webmaster@example.com</span></p>
+</li>
+
+<li><p>Finally press "Install" to install the contact script.  If you should receive an error don't worry!  Check your input and try again.</p></li>
+</ol>
+
+<p class="l3title"><a name="tempSystem">Template System</a></p>
+<p>The template system was designed to make editing the HTML portion of the script easier.   Instead of including it with the PHP, the HTML is in the templates directory.  If you have a layout that your are using just paste it in the appropriate files. These are the template files of the starship enterprise ...</p>
+<ol>
+<li>"header.php"  This file contains all of the HTML before the contact form.  Your &lt;html&gt;&lt;head&gt;&lt;/head&gt; and the top of the &lt;body&gt; goes here.</li>
+<li>"footer.php"  This file contains all of the HTML after the contact form.  The closing tags for the body &lt;/body&gt; and page &lt;/html&gt; go here.</li>
+
+<p>These next two files have PHP elements in them, I'd suggest ignoring them unless you know a little PHP.</p>
+<li>"form.php"  Edit this file if you want to change the look of the email form.</li>
+<li>"sent.php"  This is displayed after the user sends an email.  Think of it as being sandwiched between both the header and footer files, because it is.</li>
+</ol>
+
+<p>This script is licensed under the GNU General Public License which means that you can change whatever you want to.  However, I would appreciate it if you left the "Powered by Mike's Contact Script © 2005" intact.  It makes me happy, and I have to be happy to continue creating scripts! :-)</p>
+
+<p class="l2title"><a name="ftp">c. Install using FTP</a></p>
+<p>I did my best to make this script easy to install, you should have no trouble installing it with an FTP client.</p>
+
+<p>Before we get started let me make some assumptions.  First, that you have an FTP client.  If you don't, I recommend you download one of these clients:<br>
+Windows - SmartFTP http://www.smartftp.com<br>
+Mac - Fetch http://fetchsoftworks.com/<br>
+Linux - ftp via the shell or fancy GUI client such as gFTP http://www.gftp.org/</p>
+
+<p>Second, that you downloaded a current copy of the script.  If not get it from http://www.themike.com/programs.php.</p>
+
+<ol>
+<li><p>Unpack the script using you're favorite archive utility.<br>
+Windows: Use winRAR -  http://www.rarlab.com/<br>
+Mac/Linux/Unix:  Open up a terminal window and type<br>
+<span class="code">tar -zxvf contactForm-1-1-0.tar.gz</span><br>
+Where * is the version number of the downloaded script</p></li>
+
+<li><p>Connect to your web server using your FTP client.</p></li>
+
+<li><p>Upload all of the extracted files to your web server, keeping the directory structure intact.  I recommend uploading the whole contactForm directory at once.</p></li>
+
+<li><p>Change the permissions of constants.php, emails.php, and formSelection.php to 666 or rw-rw-rw-.  There is usually a way to do this using your FTP client.  In SmartFTP you do so by right clicking on the file and selecting "Properties / CHMOD."  You'll have to consult your FTP client documentation to figure out how to do this.
+
+Depending upon how your web server is set up you may not need to preform this step.  If you feel adventurous try it installing without changing the permissions.  The install script will show an error right away if the permissions need to be changed.</p></li>
+
+<li><p>Open up install.php in your web browser.  For example,<br>
+<span class="code">http://www.example.com/contactForm/install.php</span></p></li>
+
+<li><p>Fill out the form, if you need help see the Install Script section, press install and check the output for any errors.  If you get an error go back and check your input, also double check the permissions.</p></li>
+
+<li><p>If there were no errors, then you are finished!  Send a test email using the script and remember to DELETE the file install.php.</p></li>
+</ol>
+
+<p class="l2title"><a name="console">d. Installing on a UNIX/Linux server via console</a></p>
+<ol>
+<li><p>Connect to your servers console.</p></li>
+
+<li><p>Upload the archive to your server using ftp or wget.</p></li>
+
+<li><p>Extract the archive using:<br>
+<span class="code">tar -zxvf contactForm-1-1-0.tar.gz</span><br>
+Where * is the version number of the downloaded script.</p></li>
+
+<li><p>Change the permissions of constants.php, emails.php, and formSelection.php to 666 using:<br>
+<span class="code">chmod 666 constants.php emails.php formSelection.php</span></p></li>
+
+<li><p>Open up install.php in your web browser.  For example,<br>
+<span class="code">http://www.example.com/contactForm/install.php</span></p></li>
+
+<li><p>Fill out the form, if you need help see the Install Script section, press install and check the output for any errors.  If you get an error go back and check your input, also double check the permissions.</p></li>
+
+<li><p>If there were no errors, then you are finished!  Send a test email using the script and remember to DELETE the file install.php.<br>
+<span class="code">rm install.php</span></p></li>
+</ol>
+</div>
+
+<div class="layout">
+<p class="title"><a name="license">4. License</a></p>
+
+<p>Mike's Contact Script - A web based contact form.
+Copyright (C) 2005  Mike Hanson (themike.com)</p>
+
+<p>This file is part of Mike's Contact Script.</p>
+
+<p>Mike's Contact Script is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.</p>
+
+<p>Mike's Contact Script is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License
+along with Mike's Contact Script; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA</p>
+</div>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

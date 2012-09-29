@@ -1,0 +1,62 @@
+Mike's Contact Script:
+
+1.1 - AFFECTED FILES: 	constants.php, index.php, install.php, freecap14.php, templates/form.php
+      ADDED FILES: 	.ht_VeraMoBd.ttf, .ht_VeraSeBd.ttf, captcha_image.php, gotcha.php
+      REMOVED FILES: 	.ht_freecap_im1.jpg, .ht_freecap_im2.jpg, .ht_freecap_im3.jpg, .ht_freecap_im4.jpg, .ht_freecap_im5.jpg
+Notes: Added some basic features.  There's no real reason to upgrade 
+	unless you want the extra functionality of the install script.  
+	I do recommend upgrading if you are having trouble with freeCap
+	(the CAPTCHA image) displaying properly.
+
+ * install.php 
+	- The biggest change to the install script is the ability to select 
+		different CAPTCHA images.  If you are having problems with
+		freeCap on your server, try out GOTCHA.  I also added the 
+		option to turn it off if you really don't want it.
+	- Another big change is the option to enter multiple email addresses 
+		per option.  Useful if you want to have any message sent to 
+		someone copied to another address.
+	- Other minor changes to the input testing for the install script.
+
+ * constants.php, index.php, templates/form.php 
+	- Modified for GOTCHA.
+
+ * freecap14.php - Fixed broken CAPTCHA image again.
+	- Removed brute force attack protection from freeCap.  It wasn't
+		needed, the contact script already takes care of that.
+   Bug submitted by Lee W.
+	- Problem: freecap14.php uses more than 8MB of memory, which causes 
+		problems when the default memory_limit is enabled in PHP. 
+	- Solution: This is caused by poor memory management when using 
+		background type three (morphed image blocks).  Fixed by 
+		switching the default background type to one (white background
+		with grid).
+
+ +  .ht_acknowtt.ttf, captcha_image.php, gotcha.php
+	- Files added for the GOTCHA CAPTCHA
+
+ - .ht_freecap_im1.jpg, .ht_freecap_im2.jpg, .ht_freecap_im3.jpg, .ht_freecap_im4.jpg, .ht_freecap_im5.jpg 
+	- These files were removed because they are no longer needed with
+		the switch to background type one.  
+
+
+1.0.1 - AFFECTED FILES: install.php, templates/form.php, freecap14.php, constants.php
+Notes: Just general bug fixes, no security upgrades.
+
+ * install.php - Fixed fopen errors
+	- Problem: Missing double quotes around mode bits.
+	- Solution: Added double quotes around mode bits. :-P
+
+ * templates/form.php - Fixed Undefined index errors
+	- Problem: No test for empty variables.
+	- Solution: Added isset() test before echoing variables.
+
+ * freecap14.php & install.php & constants.php - Fixed broken CAPTCHA image
+   Bug submitted by Lee W.
+	- Problem: Older versions of GD do not implement ImageCreateTrueColor
+		which was used by freecap14.php.
+	- Added check for older versions of GD, now when using older versions
+		ImageCreateTrueColor is replace by ImageCreate.
+
+
+1.0 - Script launched

@@ -1,0 +1,4 @@
+AddHandler mod-rewrite 1
+AddHandler mod-rewrite mod_rewrite
+AddHandler mod-rewrite RewriteRule
+Allow from All

@@ -1,0 +1,54 @@
+.center {
+text-align:center;
+}
+.contactCopyright {
+color:#666666;
+font-size:10px;
+text-align:center;
+}
+.contactDescript {
+font-size:small;
+text-align:right;
+}
+#left {
+text-align:left;
+}
+#center {
+text-align:center;
+}
+.contactForm {
+background-color:#FFFFFF;
+border: 1px solid #666666;
+color:#333333;
+font-family:Verdana,Arial,Helvetica,sans-serif;
+margin-bottom:5px;
+padding:10px;
+}
+.contactFinePrint {
+font-size:xx-small;
+}
+.contactMessage {
+font-family:Lucida Console,Lucida Sans Unicode,Verdana;
+font-size:small;
+}
+.error {
+color:#FF0000;
+font-size:medium;
+font-weight:bold;
+}
+.header {
+font-size:xx-large;
+}
+.mainLayout {
+margin-left:auto;
+margin-right:auto;
+}
+.status {
+font-size:small;
+}
+body {
+background-color:#E5E5E5;
+}
+textarea {
+font-size:normal;
+}
